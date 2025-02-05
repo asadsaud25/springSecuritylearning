@@ -21,6 +21,7 @@ public class WebSecurityConfig {
                 .securityMatcher("/**")
                 .authorizeHttpRequests(resgistry -> resgistry
                     .requestMatchers("/").permitAll()  
+                    .requestMatchers("/auth/login").permitAll()
                     .anyRequest().authenticated()  
                 );
 
