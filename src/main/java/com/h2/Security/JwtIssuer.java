@@ -10,9 +10,11 @@ import org.springframework.stereotype.Component;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Component
+@Getter
 @RequiredArgsConstructor
 public class JwtIssuer {
     private final JwtProperties properties;
