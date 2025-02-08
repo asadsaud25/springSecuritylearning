@@ -20,7 +20,6 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public LoginResponse attemptLogin(String email, String password) {
-        {
 
         var authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(email, password)
@@ -37,6 +36,5 @@ public class AuthService {
         return LoginResponse.builder()
                 .accessToken(token)
                 .build();
-    }
     }
 }
