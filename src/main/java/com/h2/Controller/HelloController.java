@@ -19,7 +19,13 @@ public class HelloController {
 
     @GetMapping("/secured")
     public String Secured(@AuthenticationPrincipal UserPrincipal principal) {
-        return "If you see this, you are authenticated as " + principal.getEmail() 
+        return "If you see this, you are authenticated as USER: " + principal.getEmail() 
+                + " UserId " + principal.getUserId();
+    }
+
+    @GetMapping("/admin")
+    public String admin(@AuthenticationPrincipal UserPrincipal principal) {
+        return "If you see this, you are authenticated as ADMIN " + principal.getEmail() 
                 + " UserId " + principal.getUserId();
     }
 }

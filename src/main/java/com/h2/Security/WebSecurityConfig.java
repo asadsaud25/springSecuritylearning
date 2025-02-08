@@ -36,6 +36,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(resgistry -> resgistry
                     .requestMatchers("/").permitAll()  
                     .requestMatchers("/auth/login").permitAll()
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated()  
                 );
 
