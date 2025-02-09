@@ -22,7 +22,9 @@ public class WebSecurityConfig {
     
     private final JwtAuthenticationFiltre jwtAuthenticationFiltre;
     private final CustomUserDetailService customUserDetailService;
+    private final UnauthorizedHandler unauthorizedHandler;
 
+    @SuppressWarnings("removal")
     @Bean
     public SecurityFilterChain applicationSecurity(HttpSecurity http) throws Exception {
         http.addFilterBefore(jwtAuthenticationFiltre, UsernamePasswordAuthenticationFilter.class);
@@ -32,6 +34,9 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(AbstractHttpConfigurer::disable)
+                .exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler)
+                .and()
                 .securityMatcher("/**")
                 .authorizeHttpRequests(resgistry -> resgistry
                     .requestMatchers("/").permitAll()  
@@ -49,6 +54,7 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @SuppressWarnings("removal")
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
